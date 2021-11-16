@@ -58,7 +58,7 @@ if __name__ == "__main__":
     sizey = int(input("Write height of labyrinth: "))
 
     print(f"Size of labyrinth is ({sizex}, {sizey})")
-    print("This labyrinth can be impossible because it is generates randomly")
+    print("This labyrinth can be impossible because it generates randomly")
 
     walls = int(input("How many walls do you want: "))
 
