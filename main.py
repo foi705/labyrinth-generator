@@ -57,8 +57,8 @@ if __name__ == "__main__":
     sizex = int(input("Write width of labyrinth: "))
     sizey = int(input("Write height of labyrinth: "))
 
-    print(f"Size of labyrinth is ({sizex}, {sizey})")
-    print("This labyrinth can be impossible because it generates randomly")
+    print(f"Size of labyrinth is ({sizex}, {sizey}), area: {sizex*sizey}")
+    print("This labyrinth can be impossible because it is generates randomly")
 
     walls = int(input("How many walls do you want: "))
 
@@ -77,12 +77,15 @@ if __name__ == "__main__":
         print("Print 2 if you want to retry")
         print("Print 3 if you want to set player position")
         print("Print 4 if you want to set victory position")
+        print("Print 5 if you want to exit")
 
         choice = int(input("Write your choice: "))
 
         if choice == 1:
             printCPPGrid(grid)
-            break
+
+        elif choice == 2:
+            grid = renderGrid(sizex, sizey, walls)
 
         elif choice == 3:
             
@@ -108,6 +111,7 @@ if __name__ == "__main__":
 
             grid[victoryy][victoryx] = "*"
             
-    print("Goodbye!")
+        elif choice == 5:
+            break
 
-    
+    print("Goodbye!")
