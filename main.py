@@ -2,6 +2,12 @@
 
 import random
 
+def inputPosition(name):
+    return (
+        int(input(f"Print {name} x position: ")),
+        int(input(f"Print {name} y position: "))
+    )
+
 def printGrid(grid):
     for i in range(len(grid)):
         if i % 2 == 0:
@@ -77,7 +83,9 @@ if __name__ == "__main__":
         print("Print 2 if you want to retry")
         print("Print 3 if you want to set player position")
         print("Print 4 if you want to set victory position")
-        print("Print 5 if you want to exit")
+        print("Print 5 if you want to set new wall position")
+        print("Print 6 if you want to exit")
+        
 
         choice = int(input("Write your choice: "))
 
@@ -94,8 +102,7 @@ if __name__ == "__main__":
             if curplayerx != -1 and curplayery != -1:
                 grid[curplayery][curplayerx] = "."
 
-            playerx = int(input("Print player x coordinate: "))
-            playery = int(input("Print player y coordinate: "))
+            playerx, playery = inputPosition("player")
 
             grid[playery][playerx] = "@"
 
@@ -106,12 +113,16 @@ if __name__ == "__main__":
             if curvictoryx != -1 and curvictoryy != -1:
                 grid[curvictoryy][curvictoryx] = "."
             
-            victoryx = int(input("Print victory x coordinate: "))
-            victoryy = int(input("Print victory y coordinate: "))
+            victoryx, victoryy = inputPosition("victory")
 
             grid[victoryy][victoryx] = "*"
             
         elif choice == 5:
+
+            wallx, wally = inputPosition("wall")
+            grid[wally][wallx] = "#"
+
+        elif choice == 6:
             break
 
     print("Goodbye!")
