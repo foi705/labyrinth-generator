@@ -1,6 +1,13 @@
 # Random labyrinth generator
 
+clipboardImported = False
+
 import random
+try:
+    import clipboard
+    clipboardImported = True
+except:
+    pass
 
 def inputPosition(name):
     return (
@@ -36,27 +43,29 @@ def renderGrid(sizex, sizey, walls):
 def printCPPGrid(grid):
     print("Start .cpp")
 
-    print("void randomlab(vector<field>& labyrinths){")
-    print("    int p = labyrinths.size();")
-    print(f"    labyrinths.push_back(field({len(grid)}, {len(grid[0])}));")
-    print("    victory * v = new victory(&labyrinths[p]);")
+    cppString = ""
+
+    cppString += "void randomlab(vector<field>& labyrinths){\n"
+    cppString += "    int p = labyrinths.size();\n"
+    cppString += f"    labyrinths.push_back(field({len(grid)}, {len(grid[0])}));\n"
+    cppString += "    victory * v = new victory(&labyrinths[p])\n;"
 
     for y in range(len(grid)):
         for x in range(len(grid[y])):
             if grid[y][x] == "#":
-                print(f"    labyrinths[p].set_cell({y},{x}, new wall(NULL));")
+                cppString += f"    labyrinths[p].set_cell({y},{x}, new wall(NULL));\n"
             elif grid[y][x] == "*":
-                print(f"    labyrinths[p].set_cell({y},{x}, v);")
+                cppString += f"    labyrinths[p].set_cell({y},{x}, v);\n"
             elif grid[y][x] == "@":
-                print(f"    labyrinths[p].set_start_row({y});")
-                print(f"    labyrinths[p].set_start_col({x});")
+                cppString += f"    labyrinths[p].set_start_row({y});\n"
+                cppString += f"    labyrinths[p].set_start_col({x});\n"
             
-    
-    print("    /*")
-    print("    Add victory position and player position")
-    print("    */")
-    print("}")
+    cppString += "}"
+    print(cppString)
     print("End .cpp")
+    if (clipboardImported):
+        clipboard.set(cppString)
+        print("This file copied in your copy buffer")
 
 if __name__ == "__main__":
 
@@ -85,7 +94,6 @@ if __name__ == "__main__":
         print("Print 4 if you want to set victory position")
         print("Print 5 if you want to set new wall position")
         print("Print 6 if you want to exit")
-        
 
         choice = int(input("Write your choice: "))
 
